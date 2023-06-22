@@ -93,7 +93,7 @@ module.exports = (io) => {
                     const user = await User.findById(userId);
 
                     const updatedRating =
-                        (user.rating * user.numRatings + newRating) / (user.numRatings + 1);
+                        (user.rating * (user.numRatings + 1) + newRating) / (user.numRatings + 1);
 
                     const roundedRating = parseFloat(updatedRating.toFixed(2));
                     await User.findByIdAndUpdate(
