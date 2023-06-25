@@ -113,15 +113,12 @@ router.patch('/update', authMiddleware, upload.single('profileImage'), async (re
         user.firstName = firstName || user.firstName;
         user.lastName = lastName || user.lastName;
         user.phone = phone || user.phone;
+        user.password = newPassword || user.password;
 
         if (profileImage) {
             user.profileImage = profileImage.path;
         }
-
-        if (newPassword) {
-            user.password = await bcrypt.hash(newPassword, 10);
-        }
-
+        
         await user.save();
 
         res.status(200).json({ message: 'Profile updated successfully', user });
